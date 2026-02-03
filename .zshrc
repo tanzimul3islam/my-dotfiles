@@ -214,10 +214,10 @@ zstyle ':completion:*' menu select
 # ~~~~~~~~~~~~~~~ Sourcing ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-source "$HOME/.privaterc"
-source <(fzf --zsh)
-
-eval "$(direnv hook zsh)"
+# source "$HOME/.privaterc"
+# source <(fzf --zsh)
+#
+# eval "$(direnv hook zsh)"
 
 # ~~~~~~~~~~~~~~~ Misc ~~~~~~~~~~~~~~~~~~~~~~~~
 

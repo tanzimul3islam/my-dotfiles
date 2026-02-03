@@ -123,9 +123,17 @@ create_symlinks "${common_items[@]}"
 
 # Arch Linux
 
-pacman packages:
-sudo pacman -Syu zsh zsh-completions ttf-ubuntu-mono-nerd fzf npm unzip tmux ripgrep fd
+# pacman packages:
+sudo pacman -Syu zsh zsh-completions ttf-ubuntu-mono-nerd fzf npm unzip tmux ripgrep fd sddm
+sudo pacman -S --needed sddm qt6-svg qt6-virtualkeyboard qt6-multimedia-ffmpeg
+git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM
+cd SilentSDDM/
+sudo mkdir -p /usr/share/sddm/themes/silent
+sudo cp -rf . /usr/share/sddm/themes/silent/
+sudo cp -r /usr/share/sddm/themes/silent/fonts/* /usr/share/fonts/
+ln -sf "$PWD/sddm.conf" "/etc/sddm.conf"
 
-set up prompt
+# set up prompt
 mkdir -p "$HOME/.zsh"
 git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+chsh -s $(which zsh)
