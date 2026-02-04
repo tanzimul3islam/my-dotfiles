@@ -124,7 +124,7 @@ create_symlinks "${common_items[@]}"
 # Arch Linux
 
 # pacman packages:
-sudo pacman -Syu zsh zsh-completions ttf-ubuntu-mono-nerd fzf npm unzip tmux ripgrep fd sddm
+sudo pacman -Syu zsh zsh-completions ttf-ubuntu-mono-nerd fzf npm unzip tmux ripgrep fd k9s lazydocker
 sudo pacman -S --needed sddm qt6-svg qt6-virtualkeyboard qt6-multimedia-ffmpeg
 git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM
 cd SilentSDDM/
