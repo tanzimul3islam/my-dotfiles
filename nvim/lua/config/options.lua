@@ -42,3 +42,11 @@ opt.scrolloff = 8
 vim.g.lazygit_config = false
 
 vim.g.snacks_animate = false
+
+vim.filetype.add({
+  extension = {
+    tf = "terraform",
+    tfvars = "terraform",
+    hcl = "hcl",
+  },
+})

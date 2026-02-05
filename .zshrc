@@ -125,13 +125,13 @@ alias icloud="cd \$ICLOUD"
 # Repos
 
 alias lab='cd $LAB'
-alias dot='cd $GHREPOS/dotfiles'
+alias dot='cd ~/Repos/github.com/tanzimul3islam/dotfiles/'
 alias repos='cd $REPOS'
 alias ghrepos='cd $GHREPOS'
 alias gr='ghrepos'
 alias cdgo='cd $GHREPOS/go/'
 alias rob='cd $REPOS/github.com/rwxrob'
-
+alias vim='cd ~/Repos/github.com/tanzimul3islam/dotfiles/nvim/'
 
 
 # ls

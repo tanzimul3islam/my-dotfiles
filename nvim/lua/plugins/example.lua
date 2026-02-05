@@ -97,6 +97,17 @@ return {
     },
   },
 
+  -- mason nvim dap utilizes mason to automatically ensure debug adapters you want installed are installed, mason-lspconfig will not automatically install debug adapters for us
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    config = function()
+      -- ensure the java debug adapter is installed
+      require("mason-nvim-dap").setup({
+        ensure_installed = { "java-debug-adapter", "java-test" },
+      })
+    end,
+  },
+
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -168,8 +179,8 @@ return {
     opts = function(_, opts)
       -- add tsx and treesitter
       vim.list_extend(opts.ensure_installed, {
-          "tsx",
-          "typescript",
+        "tsx",
+        "typescript",
       })
     end,
   },
@@ -209,6 +220,7 @@ return {
         "shellcheck",
         "shfmt",
         "flake8",
+        "jdtls",
       },
     },
   },
