@@ -37,6 +37,7 @@ common_directories=(
   "$XDG_CONFIG_HOME/qutebrowser"
   "$XDG_CONFIG_HOME/waybar"
   "$XDG_CONFIG_HOME/hypr"
+  "$XDG_CONFIG_HOME/wofi"
 )
 
 common_items=(
@@ -54,6 +55,8 @@ common_items=(
   "hypr/hyprland.conf:$XDG_CONFIG_HOME/hypr/hyprland.conf"
   "hypr/hypridle.conf:$XDG_CONFIG_HOME/hypr/hypridle.conf"
   "hypr/hyprlock.conf:$XDG_CONFIG_HOME/hypr/hyprlock.conf"
+  "wofi/style.css:$XDG_CONFIG_HOME/wofi/style.css"
+  "sddm/sddm.conf:/etc/sddm.conf"
 )
 
 create_directories "${common_directories[@]}"
@@ -121,19 +124,25 @@ create_symlinks "${common_items[@]}"
 # Ubuntu systems, because I use the v alias everywhere.
 # sudo ln -sf /usr/bin/vim /usr/bin/nvim
 
-# Arch Linux
+# --- Arch Linux Section ---
+sudo pacman -Syu --needed zsh zsh-completions ttf-ubuntu-mono-nerd fzf npm unzip tmux ripgrep fd k9s lazydocker sddm qt6-svg qt6-virtualkeyboard qt6-multimedia-ffmpeg
 
-# pacman packages:
-sudo pacman -Syu zsh zsh-completions ttf-ubuntu-mono-nerd fzf npm unzip tmux ripgrep fd k9s lazydocker
-sudo pacman -S --needed sddm qt6-svg qt6-virtualkeyboard qt6-multimedia-ffmpeg
-git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM
-cd SilentSDDM/
-sudo mkdir -p /usr/share/sddm/themes/silent
-sudo cp -rf . /usr/share/sddm/themes/silent/
-sudo cp -r /usr/share/sddm/themes/silent/fonts/* /usr/share/fonts/
-ln -sf "$PWD/sddm.conf" "/etc/sddm.conf"
+# SDDM Theme Setup (Using a subshell to avoid directory jumping)
+(
+  git clone -b main --depth=1 https://github.com/uiriansan/SilentSDDM /tmp/SilentSDDM
+  cd /tmp/SilentSDDM
+  sudo mkdir -p /usr/share/sddm/themes/silent
+  sudo cp -rf . /usr/share/sddm/themes/silent/
+  sudo cp -r /usr/share/sddm/themes/silent/fonts/* /usr/share/fonts/
+)
 
-# set up prompt
-mkdir -p "$HOME/.zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
-chsh -s $(which zsh)
+# --- Zsh Setup ---
+if [ ! -d "$HOME/.zsh/pure" ]; then
+  mkdir -p "$HOME/.zsh"
+  git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+fi
+
+# Only change shell if it's not already zsh
+if [[ $SHELL != *"zsh"* ]]; then
+  chsh -s "$(which zsh)"
+fi
